@@ -1,11 +1,11 @@
-const express = require("express");
-const morgan = require("morgan");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const passport = require("passport");
-const githubStrategy = require("passport-github").Strategy;
-const mongoose = require("mongoose")
+const passport = require("passport")
 
+module.exports = app => {
+
+    app.get("/auth/github", passport.authenticate("github"))
+
+    app.get("/auth/github/callback", passport.authenticate("github", { successRedirect: "/books", failureRedirect: "/login" }))
+}
 
 require("dotenv").config();
 const User = require("./models/users.js")
@@ -37,7 +37,7 @@ passport.use(new githubStrategy({
 }, (accessToken, refreshToken, profile, cb) => {
     console.log(profile)
     User.findOrCreate({ username: profile.username, fullname: profile.displayName }).then((err, user) => {
-        console.log(user)
+        //console.log(user)
         cb(err, user)
     })
 }));
