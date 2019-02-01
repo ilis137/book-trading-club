@@ -1,8 +1,11 @@
 const express = require("express")
 const morgan = require("morgan")
+const cors = require("cors")
 const bodyParser = require("body-parser")
 const passport = require("passport")
 const githubStrategy = require("passport-github").Strategy
+
+
 const app = express()
 const port = process.env.PORT || 3000
 
