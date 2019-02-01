@@ -6,6 +6,7 @@ const passport = require("passport");
 const githubStrategy = require("passport-github").Strategy;
 
 require("dotenv").config();
+const User = require("./models/users")
 
 console.log(process.env.CLIENT_ID)
 console.log(process.env.CLIENT_SECRET)
