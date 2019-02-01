@@ -40,11 +40,11 @@ passport.use(new githubStrategy({
         cb(err, user)
     })
 }));
-
+//serialize session
 passport.serializeUser((user, done) => {
     done(null, user);
 });
-
+//deserialize session
 passport.deserializeUser((obj, done) => {
     done(null, obj);
 });
