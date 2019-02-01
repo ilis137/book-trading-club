@@ -17,14 +17,13 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 //Apply Middleware
+app.use(require('express-session')({ secret: "hsdfgmsh234sd", resave: true, saveUninitialized: true, maxAge: 24 * 60 * 1000 }));
 app.use(cors());
 app.use(morgan("combined"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(require('express-session')({ secret: "hsdfgmsh234sd", resave: true, saveUninitialized: true, maxAge: 24 * 60 * 1000 }));
-
 
 mongoose.Promise = global.Promise
 mongoose.connect(process.env.mongoURL, { useNewUrlParser: true }, () => {
@@ -46,7 +45,7 @@ passport.use(new githubStrategy({
 passport.serializeUser((user, done) => {
     done(null, user);
 });
-//deserialize session
+//deserialize se
 passport.deserializeUser((obj, done) => {
     done(null, obj);
 });
