@@ -35,7 +35,7 @@ passport.use(new githubStrategy({
     clientSecret: process.env.CLIENT_SECRET,
     callbackURL: "https://book-trading-iliyas.herokuapp.com/auth/github/callback"
 }, (accessToken, refreshToken, profile, cb) => {
-    console.log(profile)
+    //console.log(profile)
     User.findOrCreate({ username: profile.username, fullname: profile.displayName }).then((err, user) => {
         //console.log(user)
         cb(err, user)
