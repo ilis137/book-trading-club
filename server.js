@@ -8,7 +8,7 @@ const mongoose = require("mongoose")
 
 
 require("dotenv").config();
-const User = require("./models/users")
+const User = require("./models/users.js")
 
 console.log(process.env.CLIENT_ID)
 console.log(process.env.CLIENT_SECRET)
@@ -45,7 +45,7 @@ passport.use(new githubStrategy({
 passport.serializeUser((user, done) => {
     done(null, user);
 });
-//deserialize se
+//deserialize session
 passport.deserializeUser((obj, done) => {
     done(null, obj);
 });
