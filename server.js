@@ -39,6 +39,7 @@ passport.use(new githubStrategy({
     User.findOrCreate({ username: profile.username, fullname: profile.displayName }).then((err, user) => {
         //console.log(user)
         console.log(err)
+        console.log(user)
         return cb(err, user)
     })
 }));
