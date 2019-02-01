@@ -36,10 +36,9 @@ passport.use(new githubStrategy({
     callbackURL: "https://book-trading-iliyas.herokuapp.com/auth/github/callback"
 }, (accessToken, refreshToken, profile, cb) => {
     //console.log(profile)
-    User.findOrCreate({ username: profile.username, fullname: profile.displayName }).then((err, user) => {
+    User.findOrCreate({ username: profile.username, fullname: profile.displayName }).then((user, err) => {
         //console.log(user)
-        console.log(err)
-        console.log(user)
+
         return cb(err, user)
     })
 }));
