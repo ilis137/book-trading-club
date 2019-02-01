@@ -19,7 +19,8 @@ app.use(morgan("combined"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
-//app.use(passport.session());
+app.use(passport.session());
+
 //Authentication Middleware
 passport.use(new githubStrategy({
     clientID: process.env.CLIENT_ID,
@@ -27,8 +28,19 @@ passport.use(new githubStrategy({
     callbackURL: "https://book-trading-iliyas.herokuapp.com/auth/github/callback"
 }, (accessToken, refreshToken, profile, cb) => {
     console.log(profile)
-    cb(null, profile)
+    User.findOrCreate({ username: profile.username, fullname: displayName }).then((err, user) => {
+        console.log(user)
+        cb(err, user)
+    })
 }));
+
+passport.serializeUser((user, done) => {
+    done(null, user);
+});
+
+passport.deserializeUser((obj, done) => {
+    done(null, obj);
+});
 
 require("./routes/routes")(app)
     //Start the server
