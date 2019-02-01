@@ -26,6 +26,7 @@ passport.use(new githubStrategy({
     callbackURL: "https://book-trading-iliyas.herokuapp.com/auth/github/callback"
 }, (accessToken, refreshToken, profile, cb) => {
     console.log(profile)
+    cb(null, profile)
 }));
 
 require("./routes/routes")(app)
