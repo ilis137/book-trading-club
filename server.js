@@ -4,7 +4,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const githubStrategy = require("passport-github").Strategy;
-const mongoose=require("mongoose")
+const mongoose = require("mongoose")
 
 
 require("dotenv").config();
@@ -24,18 +24,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.Promise=global.Promise
+mongoose.Promise = global.Promise
 mongoose.connect(process.env.mongoURL, { useNewUrlParser: true }, () => {
-    console.log("successfully connected to mongodb")
-})
-//Authentication Middleware
+        console.log("successfully connected to mongodb")
+    })
+    //Authentication Middleware
 passport.use(new githubStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
     callbackURL: "https://book-trading-iliyas.herokuapp.com/auth/github/callback"
 }, (accessToken, refreshToken, profile, cb) => {
     console.log(profile)
-    User.findOrCreate({ username: profile.username, fullname: displayName }).then((err, user) => {
+    User.findOrCreate({ username: profile.username, fullname: profile.displayName }).then((err, user) => {
         console.log(user)
         cb(err, user)
     })
