@@ -38,7 +38,7 @@ passport.use(new githubStrategy({
     //console.log(profile)
     User.findOrCreate({ username: profile.username, fullname: profile.displayName }).then((err, user) => {
         //console.log(user)
-        cb(err, user)
+        return cb(err, user)
     })
 }));
 //serialize session
