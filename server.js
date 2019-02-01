@@ -7,8 +7,8 @@ const githubStrategy = require("passport-github").Strategy;
 
 require("dotenv").config();
 
-console.log(process.env.CLIENT_ID);
-console.log(process.env.CLIENT_SECRET);
+console.log(process.env.CLIENT_ID)
+console.log(process.env.CLIENT_SECRET)
 
 const app = express();
 const port = process.env.PORT || 3000;
