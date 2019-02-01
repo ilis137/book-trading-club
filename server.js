@@ -18,11 +18,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //Authentication Middleware
-// passport.use(new githubStrategy({
-//     clientID: process.env.CLIENT_ID,
-//     clientSecret: process.env.CLIENT_SECRET,
-//     callbackURL: "https://book-trading-iliyas.herokuapp.com/auth/github/callback"
-// }, ()));
+passport.use(new githubStrategy({
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    callbackURL: "https://book-trading-iliyas.herokuapp.com/auth/github/callback"
+}, (accessToken, refreshToken, profile, cb) => {
+    console.log(profile)
+}));
 
 //Start the server
 app.listen(port, () => console.log(`server is up at port ${port}`));
