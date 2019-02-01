@@ -26,5 +26,6 @@ passport.use(new githubStrategy({
     console.log(profile)
 }));
 
-//Start the server
+require("./routes/routes")(app)
+    //Start the server
 app.listen(port, () => console.log(`server is up at port ${port}`));
