@@ -18,6 +18,7 @@ module.exports = app => {
         })
         //API to get info for Editing profile
     app.get("/editInfo", (req, res) => {
+        const { username } = req.body
         User.findOne({ username: username }).then((user, err) => {
             if (err)
                 throw (err)
@@ -28,6 +29,7 @@ module.exports = app => {
 
     //API to get userInfo
     app.get("/UserInfo", require("connect-ensure-login").ensureLoggedIn(), (req, res) => {
+        const { username } = req.body
         User.findOne({ username: username }).then((user, err) => {
             if (err)
                 throw (err)
