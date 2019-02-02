@@ -84,30 +84,36 @@ module.exports = app => {
     //API to get all books for trade
     app.get("/books", (req, res) => {
 
-            Book.find({}).then((books) => {
-                books.map((book) => {
-                    User.find({ username: book.ownersname }).then(user => {
-                        if (user.city)
-                            book.city = user.city
-                        else
-                            book.city = ""
+        Book.find({}).then((books) => {
+            books.map((book) => {
+                User.find({ username: book.ownersname }).then(user => {
+                    if (user.city)
+                        book.city = user.city
+                    else
+                        book.city = ""
 
-                    }).catch(err => { throw (err) })
+                }).catch(err => { throw (err) })
 
-                })
-                res.render("Books", { books: books })
-
-            }).catch(err => {
-                throw (err)
             })
+            res.render("Books", { books: books })
+
+        }).catch(err => {
+            throw (err)
         })
-        //API to select book to give
+    })
+
+    //API to select book to give
     app.get("/select/book/give", (req, res) => {
         Book.find({ ownersname: req.user.username }).then(books => {
 
             res.render("Books", { books: books })
         }).catch(err => { throw (err) })
     })
+
+    app.post("/select/book/give", (req, res) => {
+
+    })
+
 
     //API to select book to take
     app.get("/select/book/take", (req, res) => {
@@ -157,10 +163,23 @@ module.exports = app => {
 
     //API to delete my request
     app.delete("/delete/request", (req, res) => {
-        const { id } = req.body
-        request.findByIdAndDelete(id).then(() => {
-            res.redirect("/myRequests")
+            const { id } = req.body
+            request.findByIdAndDelete(id).then(() => {
+                res.redirect("/myRequests")
+            })
         })
+        //API to accept request
+    app.post("/accept/request", (req, res) => {
+            const { id } = req.body
+            request.findByIdAndUpdate(id, { status: "completed" }, { new: true }).then(() => {
+                res.redirect("/books")
+            }).catch(err => { throw (err) })
+        })
+        //API to cancel request
+    app.post("/cancel/request", (req, res) => {
+        const { id } = req.body
+        request.findByIdAndUpdate(id, { status: "canceled" }, { new: true }).then(() => {
+            res.redirect("/books")
+        }).catch(err => { throw (err) })
     })
-
 }
