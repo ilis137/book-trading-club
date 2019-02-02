@@ -1,6 +1,7 @@
 const passport = require("passport")
 const User = require("../models/users")
 const Book = require("../models/books")
+const Request = require("../models/requests")
 module.exports = app => {
 
     app.get("/auth/github", passport.authenticate("github"))
@@ -70,28 +71,96 @@ module.exports = app => {
 
     //API to delete a book for trade
     app.delete("/books/my", (req, res) => {
-            const { username } = req.user
-            const { title } = req.body
+        const { username } = req.user
+        const { title } = req.body
 
-            Book.findOneAndDelete({ ownersname: username, title: title }).then(() => {
-                res.redirect("/books/my")
-            }).catch(err => {
-                throw (err)
-            })
+        Book.findOneAndDelete({ ownersname: username, title: title }).then(() => {
+            res.redirect("/books/my")
+        }).catch(err => {
+            throw (err)
         })
-        //API to get all books for trade
+    })
+
+    //API to get all books for trade
     app.get("/books", (req, res) => {
 
             Book.find({}).then((books) => {
-                User.find({ username: username }).then(user => {
-                    res.render("Books", { books: books, ownersname: user.username, city: user.city })
-                }).catch(err => { throw (err) })
+                books.map((book) => {
+                    User.find({ username: book.ownersname }).then(user => {
+                        if (user.city)
+                            book.city = user.city
+                        else
+                            book.city = ""
+
+                    }).catch(err => { throw (err) })
+
+                })
+                res.render("Books", { books: books })
 
             }).catch(err => {
                 throw (err)
             })
         })
-        //API 
+        //API to select book to give
+    app.get("/select/book/give", (req, res) => {
+        Book.find({ ownersname: req.user.username }).then(books => {
 
-    // app.get("/")
+            res.render("Books", { books: books })
+        }).catch(err => { throw (err) })
+    })
+
+    //API to select book to take
+    app.get("/select/book/take", (req, res) => {
+        const { username } = req.user
+        Book.find({}).then(books => {
+            books = books.filter((book) => book.ownersname !== username)
+            books.map((book) => {
+                User.find({ username: book.ownersname }).then(user => {
+                    if (user.city)
+                        book.city = user.city
+                    else
+                        book.city = ""
+
+                }).catch(err => { throw (err) })
+
+            })
+            res.render("Books", { books: books })
+        }).catch(err => { throw (err) })
+    })
+
+    //API to make a request
+    app.post("/makeRequest", (req, res) => {
+        const { requestersName, offeredBook, requestedBook, ownersname } = req.body
+        const request = new Request({
+            requestersName: requestersName,
+            offeredBook: offeredBook,
+            requestedBook: requestedBook,
+            ownersname: ownersname,
+            status: "pending"
+        })
+        request.save().then((request) => {
+            res.redirect("/books")
+        }).catch(err => {
+            throw (err)
+        })
+    })
+
+    //API to get my requests
+    app.get("/myRequests", (req, res) => {
+        const { username } = req.user
+        request.find({ requestersName: username }).then((requests) => {
+            res.render("requests", {
+                requests: requests
+            })
+        })
+    })
+
+    //API to delete my request
+    app.delete("/delete/request", (req, res) => {
+        const { id } = req.body
+        request.findByIdAndDelete(id).then(() => {
+            res.redirect("/myRequests")
+        })
+    })
+
 }
