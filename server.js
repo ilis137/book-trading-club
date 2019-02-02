@@ -25,23 +25,23 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
+//connect to  mongodb
 mongoose.Promise = global.Promise
 mongoose.connect(process.env.mongoURL, { useNewUrlParser: true }, () => {
-        console.log("successfully connected to mongodb")
-    })
-    //Authentication Middleware
+    console.log("successfully connected to mongodb")
+})
+
+//Authentication Middleware
 passport.use(new githubStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
     callbackURL: "https://book-trading-iliyas.herokuapp.com/auth/github/callback"
 }, (accessToken, refreshToken, profile, cb) => {
-    //console.log(profile)
-    User.findOrCreate({ username: profile.username, fullname: profile.displayName }).then((user, err) => {
-        //console.log(user)
-
+    User.findOrCreate({ username: profile.username, fullname: profile.displayName, city: "", address: "" }).then((user, err) => {
         return cb(err, user)
     })
 }));
+
 //serialize session
 passport.serializeUser((user, done) => {
     done(null, user);
@@ -52,5 +52,6 @@ passport.deserializeUser((obj, done) => {
 });
 
 require("./routes/routes")(app)
-    //Start the server
+
+//Start the server
 app.listen(port, () => console.log(`server is up at port ${port}`));
