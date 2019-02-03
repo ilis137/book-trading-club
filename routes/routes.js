@@ -1,6 +1,6 @@
 const passport = require("passport")
 const User = require("../models/users")
-const Book = require("../models/books")
+const Book = require("../models/book")
 const Request = require("../models/requests")
 module.exports = app => {
     app.get("/", (req, res) => {
