@@ -6,9 +6,8 @@
         <li><a href="/createRequests">create requests</a></li>
        <li class=" dropdown">
         <% if(user){ %>
-       
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-         <%= user.username %>
+        <%= user.username %>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/userInfo">Profile</a>
