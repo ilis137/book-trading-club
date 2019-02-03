@@ -88,9 +88,9 @@ module.exports = app => {
     app.get("/books", (req, res) => {
         console.log("books")
 
-        if (req.user) const { username } = req.user
-
-        else const username = null
+        if (req.user) {
+            const { username } = req.user
+        } else { const username = null }
         Book.find({}).then((books) => {
             books.map((book) => {
                 User.find({ username: book.ownersname }).then(user => {
