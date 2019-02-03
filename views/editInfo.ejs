@@ -50,7 +50,7 @@ $("#saveChanges").click(function(event){
     const address=$("#address").val()
 
     $.ajax({
-        url:"book-trading-iliyas.herokuapp.com/editInfo",
+        url:"https://book-trading-iliyas.herokuapp.com/userInfo",
         method:"PUT",
         data:{
             username:username,
