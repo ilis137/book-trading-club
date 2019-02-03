@@ -56,7 +56,7 @@ module.exports = app => {
             ownersname: username
         })
 
-        Book.save().then(book => {
+        book.save().then(book => {
             res.redirect("/books/my")
         }).catch(err => {
             throw (err)
