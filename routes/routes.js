@@ -85,7 +85,11 @@ module.exports = app => {
 
     //API to get all books for trade
     app.get("/books", (req, res) => {
-        const { username } = req.user
+
+        if (req.user)
+            const { username } = req.user
+        else
+            const username = null
         Book.find({}).then((books) => {
             books.map((book) => {
                 User.find({ username: book.ownersname }).then(user => {
