@@ -13,6 +13,7 @@ module.exports = app => {
 
     //API to Edit user Info
     app.put("/editInfo", (req, res) => {
+
             const { username, fullname, city, address } = req.body
             User.findOneAndUpdate({ username: username }, { username: username, fullname: fullname, city: city, address: address }, { new: true }).then((user, err) => {
                 res.redirect("/userInfo")
@@ -22,7 +23,7 @@ module.exports = app => {
         })
         //API to get info for Editing profile
     app.get("/editInfo", (req, res) => {
-        const { username } = req.body
+        const { username } = req.user
         User.findOne({ username: username }).then((user, err) => {
             const { username, fullname, city, address } = user
             res.render("editInfo", { username: username, fullname: fullname, city: city, address: address, user: req.user })
