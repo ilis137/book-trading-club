@@ -4,6 +4,7 @@ const Book = require("../models/books")
 const Request = require("../models/requests")
 module.exports = app => {
     app.get("/", (req, res) => {
+        console.log("home")
         res.redirect("/books")
     })
     app.get("/auth/github", passport.authenticate("github"))
@@ -85,6 +86,7 @@ module.exports = app => {
 
     //API to get all books for trade
     app.get("/books", (req, res) => {
+        console.log("books")
 
         if (req.user)
             const { username } = req.user
