@@ -11,7 +11,7 @@
                 <div class="card">
                        
                             <div class="card-content text-center">  
-                                <span class="card-title "><h3><%= user.username %> Profile</h3></span><br>
+                                <span class="card-title "><h3><%= user.username %>'s Profile</h3></span><br>
                                 <div class="input-field col s6">
                                     <input id="username" name="username"type="text" class="validate" value="<%= user.username %>">
                                     <label for="username">Username</label>
@@ -41,5 +41,28 @@
 </div>
  
 </body>
+<script>
+$("#saveChanges").click(function(event){
+    event.preventDefault()
+    const username=$("#username").value()
+    const fullname=$("#fullname").value()
+    const city=$("#city").value()
+    const address=$("#address").value()
+
+    $.ajax({
+        url:"book-trading-iliyas.herokuapp.com/editInfo",
+        method:"PUT",
+        data:{
+            username:username,
+            fullname:fullname,
+            city:city,
+            address:address
+        },
+        complete:function(){
+            window.location.assign("/userInfo")
+        }
+    })
+})
+</script>
 
 </html>
