@@ -1,0 +1,28 @@
+<nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Logo</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/books">Books</a></li>
+        <li><a href="/createRequests">create requests</a></li>
+       <li class=" dropdown">
+        <% if(username){ %>
+       
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         <%= username %>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/userInfo">Profile</a>
+          <a class="dropdown-item" href="/editInfo">Edit Profile</a>
+          <a class="dropdown-item" href="/books/my">My Books</a>
+          <a class="dropdown-item" href="/logout">Logout</a>
+        </div>
+        <% } %>
+        <% else{ %>
+         <a href="/auth/github">login</a>
+         <% } %>
+        </li>
+        
+        
+      </ul>
+    </div>
+  </nav>
