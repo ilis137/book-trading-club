@@ -99,7 +99,7 @@ module.exports = app => {
 
                 }).catch(err => { throw (err) })
 
-            })
+            }).catch(err => { throw (err) })
             res.render("Books", { books: books, user: req.user })
 
         }).catch(err => {
