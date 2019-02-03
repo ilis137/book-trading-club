@@ -96,10 +96,9 @@ module.exports = app => {
                         book.city = user.city
                     else
                         book.city = ""
-
                 }).catch(err => { throw (err) })
 
-            }).catch(err => { throw (err) })
+            })
             res.render("Books", { books: books, user: req.user })
 
         }).catch(err => {
