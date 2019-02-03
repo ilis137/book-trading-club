@@ -17,7 +17,7 @@ module.exports = app => {
             const { username, fullname, city, address } = req.body
             console.log(req.body)
             User.findOneAndUpdate({ username: username }, { username: username, fullname: fullname, city: city, address: address }, { new: true }).then((user, err) => {
-                res.redirect("/userInfo")
+                res.redirect("/UserInfo")
             }).catch(err => {
                 if (err) throw err
             })
