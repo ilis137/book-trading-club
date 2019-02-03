@@ -44,10 +44,10 @@
 <script>
 $("#saveChanges").click(function(event){
     event.preventDefault()
-    const username=$("#username").value()
-    const fullname=$("#fullname").value()
-    const city=$("#city").value()
-    const address=$("#address").value()
+    const username=$("#username").val()
+    const fullname=$("#fullname").val()
+    const city=$("#city").val()
+    const address=$("#address").val()
 
     $.ajax({
         url:"book-trading-iliyas.herokuapp.com/editInfo",
