@@ -67,6 +67,7 @@ module.exports = app => {
     app.get("/books/my", (req, res) => {
         const { username } = req.user
         Book.find({ ownersname: username }).then((books) => {
+            console.log(books)
             res.render("addBook", { books: books, user: req.user })
         }).catch(err => {
             throw (err)
