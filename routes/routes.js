@@ -25,7 +25,7 @@ module.exports = app => {
         const { username } = req.body
         User.findOne({ username: username }).then((user, err) => {
             const { username, fullname, city, address } = user
-            res.render("editInfo", { username: username, fullname: fullname, city: city, address: address })
+            res.render("editInfo", { username: username, fullname: fullname, city: city, address: address, user: req.user })
         }).catch(err => {
             if (err) throw err
         })
@@ -36,7 +36,7 @@ module.exports = app => {
         const { username } = req.body
         User.findOne({ username: username }).then((user, err) => {
             const { username, fullname, city, address } = user
-            res.render("userInfo", { username: username, fullname: fullname, city: city, address: address })
+            res.render("userInfo", { username: username, fullname: fullname, city: city, address: address, user: req.user })
         }).catch(err => {
             if (err) throw err
         })
@@ -65,7 +65,7 @@ module.exports = app => {
     app.get("/books/my", (req, res) => {
         const { username } = req.user
         Book.find({ ownersname: username }).then((books) => {
-            res.render("addBook", { books: books, username: username })
+            res.render("addBook", { books: books, user: req.user })
         }).catch(err => {
             throw (err)
         })
@@ -86,11 +86,9 @@ module.exports = app => {
 
     //API to get all books for trade
     app.get("/books", (req, res) => {
-        console.log("books")
 
-        if (req.user) {
-            const { username } = req.user
-        } else { const username = null }
+
+
         Book.find({}).then((books) => {
             books.map((book) => {
                 User.find({ username: book.ownersname }).then(user => {
@@ -102,7 +100,7 @@ module.exports = app => {
                 }).catch(err => { throw (err) })
 
             })
-            res.render("Books", { books: books, username: username })
+            res.render("Books", { books: books, user: req.user })
 
         }).catch(err => {
             throw (err)
@@ -114,7 +112,7 @@ module.exports = app => {
         const { username } = req.user
         Book.find({ ownersname: req.user.username }).then(books => {
 
-            res.render("Books", { books: books, username: username })
+            res.render("Books", { books: books, user: req.user })
         }).catch(err => { throw (err) })
     })
 
@@ -138,7 +136,7 @@ module.exports = app => {
                 }).catch(err => { throw (err) })
 
             })
-            res.render("Books", { books: books, username: username })
+            res.render("Books", { books: books, user: req.user })
         }).catch(err => { throw (err) })
     })
 
@@ -165,7 +163,7 @@ module.exports = app => {
         request.find({ requestersName: username }).then((requests) => {
             res.render("requests", {
                 requests: requests,
-                username: username
+                user: req.user
             })
         })
     })
