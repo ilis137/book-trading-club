@@ -3,10 +3,12 @@ const User = require("../models/users")
 const Book = require("../models/books")
 const Request = require("../models/requests")
 module.exports = app => {
-
+    app.get("/", (req, res) => {
+        res.redirect("/books")
+    })
     app.get("/auth/github", passport.authenticate("github"))
 
-    app.get("/auth/github/callback", passport.authenticate("github", { successRedirect: "/books", failureRedirect: "/login" }))
+    app.get("/auth/github/callback", passport.authenticate("github", { successRedirect: "/books", failureRedirect: "/" }))
 
     //API to Edit user Info
     app.put("/editInfo", (req, res) => {
@@ -62,7 +64,7 @@ module.exports = app => {
     app.get("/books/my", (req, res) => {
         const { username } = req.user
         Book.find({ ownersname: username }).then((books) => {
-            res.render("addBook", { books: books })
+            res.render("addBook", { books: books, username: username })
         }).catch(err => {
             throw (err)
         })
@@ -83,7 +85,7 @@ module.exports = app => {
 
     //API to get all books for trade
     app.get("/books", (req, res) => {
-
+        const { username } = req.user
         Book.find({}).then((books) => {
             books.map((book) => {
                 User.find({ username: book.ownersname }).then(user => {
@@ -95,7 +97,7 @@ module.exports = app => {
                 }).catch(err => { throw (err) })
 
             })
-            res.render("Books", { books: books })
+            res.render("Books", { books: books, username: username })
 
         }).catch(err => {
             throw (err)
@@ -104,9 +106,10 @@ module.exports = app => {
 
     //API to select book to give
     app.get("/select/book/give", (req, res) => {
+        const { username } = req.user
         Book.find({ ownersname: req.user.username }).then(books => {
 
-            res.render("Books", { books: books })
+            res.render("Books", { books: books, username: username })
         }).catch(err => { throw (err) })
     })
 
@@ -130,7 +133,7 @@ module.exports = app => {
                 }).catch(err => { throw (err) })
 
             })
-            res.render("Books", { books: books })
+            res.render("Books", { books: books, username: username })
         }).catch(err => { throw (err) })
     })
 
@@ -152,11 +155,12 @@ module.exports = app => {
     })
 
     //API to get my requests
-    app.get("/myRequests", (req, res) => {
+    app.get("/createRequests", (req, res) => {
         const { username } = req.user
         request.find({ requestersName: username }).then((requests) => {
             res.render("requests", {
-                requests: requests
+                requests: requests,
+                username: username
             })
         })
     })
@@ -165,7 +169,7 @@ module.exports = app => {
     app.delete("/delete/request", (req, res) => {
             const { id } = req.body
             request.findByIdAndDelete(id).then(() => {
-                res.redirect("/myRequests")
+                res.redirect("/createRequests")
             })
         })
         //API to accept request
