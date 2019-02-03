@@ -49,7 +49,7 @@ passport.use(new githubStrategy({
 
 //serialize session
 passport.serializeUser((user, done) => {
-    done(null, user);
+    done(null, user.doc);
 });
 
 //deserialize session
