@@ -33,7 +33,7 @@ module.exports = app => {
 
     //API to get userInfo
     app.get("/UserInfo", require("connect-ensure-login").ensureLoggedIn(), (req, res) => {
-        const { username } = req.body
+        const { username } = req.user
         User.findOne({ username: username }).then((user, err) => {
             const { username, fullname, city, address } = user
             res.render("userInfo", { username: username, fullname: fullname, city: city, address: address, user: req.user })
