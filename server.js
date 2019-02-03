@@ -16,6 +16,11 @@ console.log(process.env.CLIENT_SECRET)
 const app = express();
 const port = process.env.PORT || 3000;
 
+//set view engine
+app.set("views", "./views")
+app.set("view engine", "ejs")
+
+
 //Apply Middleware
 app.use(require('express-session')({ secret: "hsdfgmsh234sd", resave: true, saveUninitialized: true, maxAge: 24 * 60 * 1000 }));
 app.use(cors());
@@ -46,6 +51,7 @@ passport.use(new githubStrategy({
 passport.serializeUser((user, done) => {
     done(null, user);
 });
+
 //deserialize session
 passport.deserializeUser((obj, done) => {
     done(null, obj);
