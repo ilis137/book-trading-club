@@ -82,6 +82,7 @@ module.exports = app => {
 
         Book.findByIdAndDelete(id).then((book) => {
             Request.findOneAndDelete({ ownersname: book.ownersname }).then(() => {
+                console.log("delete request")
                 res.redirect("/books/my")
             }).catch(err => {
                 throw (err)
