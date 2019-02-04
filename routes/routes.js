@@ -78,10 +78,15 @@ module.exports = app => {
     //API to delete a book for trade
     app.delete("/books/my", (req, res) => {
         const { username } = req.user
-        const { title } = req.body
+        const { id } = req.body
 
-        Book.findOneAndDelete({ ownersname: username, title: title }).then(() => {
-            res.redirect("/books/my")
+        Book.findByIdAndDelete(id).then((book) => {
+            Request.findOneAndDelete({ ownersname: book.ownersname }).then(() => {
+                res.redirect("/books/my")
+            }).catch(err => {
+                throw (err)
+            })
+
         }).catch(err => {
             throw (err)
         })
