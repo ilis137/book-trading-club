@@ -40,7 +40,7 @@
                                                 <span><%= books[i].title %></span><br>
                                                 <h5><%= books[i].author %></h5>
                                             </div>
-                                            <i class="material-icons">cancel</i>
+                                            <i id="<%= books[i]._id %>" class="material-icons">cancel</i>
                                         </li>
                                     <% } %>
                                     
@@ -71,6 +71,21 @@ $(function(){
             data:{
                 title:bookname,
                 author:Author
+            },
+            complete:function(){
+                window.location.reload(true)
+            }
+        })
+    })
+     $(".material-icons").click(function(){
+       
+        const id=$(this).attr("id")
+
+        $.ajax({
+            url:"https://book-trading-iliyas.herokuapp.com/books/my",
+            method:"DELETE",
+            data:{
+               id:id
             },
             complete:function(){
                 window.location.reload(true)
