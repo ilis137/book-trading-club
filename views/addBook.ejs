@@ -82,7 +82,8 @@ $(function(){
             }
         })
     })
-     $(".material-icons").click(function(){
+     $(".material-icons").click(function(event){
+         event.stopPropagation()
         console.log("delete clicked")
         const id=$(this).attr("id")
 
