@@ -81,10 +81,7 @@ module.exports = app => {
         const { id } = req.body
 
         Book.findByIdAndDelete(id).then((book) => {
-
             res.redirect("/books/my")
-
-
         }).catch(err => {
             throw (err)
         })
