@@ -81,6 +81,7 @@ module.exports = app => {
         const { id } = req.body
 
         Book.findByIdAndDelete(id).then((book) => {
+            console.log(book)
             Request.findOneAndDelete({ ownersname: book.ownersname }).then(() => {
                 console.log("delete request")
                 res.redirect("/books/my")
