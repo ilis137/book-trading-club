@@ -13,13 +13,13 @@
             <% for(var i=books.length-1;i>=0;i--) { %>
                 <div class="card ">
                         <div class="card-content text-center">
-                        <div class="col s2 d-flex justify-content-between align-items-center">
+                        <div class="col s2 d-flex justify-content-center align-items-center">
                             <label for="<%= books[i]._id %>">
                                 <input type="checkbox" class="filled-in" id="<%= books[i]._id %>" />
 
                             </label>
                         </div>
-                        <div class="col s8 d-flex justify-content-between align-items-center">
+                        <div class="col s8 d-flex justify-content-center align-items-between flex-coloumn">
                            <span><h3><%= books[i].title %></h3></span><br>
                            <span><h4><%= books[i].author %></h4></span><br>
                            <% if(books[i].city){ %>
