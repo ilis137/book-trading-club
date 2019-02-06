@@ -16,6 +16,7 @@
                         <div class="col s2  " style="height:100%">
                             <label for="<%= books[i]._id %>">
                                 <input type="checkbox" class="filled-in" id="<%= books[i]._id %>" />
+                                <span>df</span>
                             </label>
                         </div>
                         <div class="col s8 d-flex justify-content-center align-items-between flex-column">
@@ -23,7 +24,7 @@
                            <span><h4><%= books[i].author %></h4></span><br>
                            <% if(books[i].city){ %>
                            <span><h4><%= books[i].ownersname %> from <%= books[i].city %></h4></span><br>
-                            <% }else{ %>
+                           <% }else{ %>
                            <span><h4><%= books[i].ownersname %> </h4></span><br>
                             <% } %>
                         </div>
