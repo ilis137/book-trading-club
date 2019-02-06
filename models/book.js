@@ -7,6 +7,6 @@ const bookSchema = new mongoose.Schema({
     ownersname: String
 })
 
-const bookModel = new mongoose.model("book", bookSchema)
+const bookModel = new mongoose.model("newbooks", bookSchema)
 
 module.exports = bookModel

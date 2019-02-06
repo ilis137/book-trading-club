@@ -116,9 +116,9 @@ module.exports = app => {
         }).catch(err => { throw (err) })
     })
 
-    app.post("/select/book/give", (req, res) => {
+    // app.post("/select/book/give", (req, res) => {
 
-    })
+    // })
 
 
     //API to select book to take
