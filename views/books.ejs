@@ -15,7 +15,7 @@
                         <div class="card-content text-center">
                         <div class="col s2  " style="height:100%">
                             <label for="<%= books[i]._id %>">
-                                <input type="checkbox" class="filled-in" id="<%= books[i]._id %>" />
+                                <input type="checkbox" class="filled-in select" id="<%= books[i]._id %>" />
                                 <span></span>
                             </label>
                         </div>
@@ -31,7 +31,7 @@
                         <div class="col s2 d-flex justify-content-center align-items-center">
                             <label>
                              <%  if(user && books[i].ownersname==user.username){ %>
-                                <i id="<%= books[i]._id %>" class="material-icons">cancel</i>
+                                <i id="<%= books[i]._id %>" class="material-icons delete">cancel</i>
                             <% } %>
                             </label>
                         </div>
@@ -53,4 +53,33 @@
         </div>
     </div>
 </body>
+<script>
+$(function(){
+    $(".delete").click(function(event){
+            event.stopPropagation()
+            console.log("delete clicked")
+            const id=$(this).attr("id")
+
+            $.ajax({
+                url:"https://book-trading-iliyas.herokuapp.com/books/my",
+                method:"DELETE",
+                data:{
+                id:id
+                },
+                complete:function(){
+                    window.location.reload(true)
+                }
+            })
+        })
+    // $(".select").click(function(event){
+    //       const id=$(this).attr("id")
+    //       const user=<%= user %>
+    //       if(id==user._id ){
+    //             localStorage.setItem(id+"")
+    //       }
+            
+    // })
+})
+
+</script>
 </html>
