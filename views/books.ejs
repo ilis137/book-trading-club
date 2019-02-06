@@ -13,13 +13,12 @@
             <% for(var i=books.length-1;i>=0;i--) { %>
                 <div class="card ">
                         <div class="card-content text-center">
-                        <div class="col s2 d-flex justify-content-center align-items-center " style="height:100%">
+                        <div class="col s2  " style="height:100%">
                             <label for="<%= books[i]._id %>">
                                 <input type="checkbox" class="filled-in" id="<%= books[i]._id %>" />
-
                             </label>
                         </div>
-                        <div class="col s8 d-flex justify-content-center align-items-between flex-coloumn">
+                        <div class="col s8 d-flex justify-content-center align-items-between flex-column">
                            <span><h3><%= books[i].title %></h3></span><br>
                            <span><h4><%= books[i].author %></h4></span><br>
                            <% if(books[i].city){ %>
@@ -28,7 +27,7 @@
                            <span><h4><%= books[i].ownersname %> </h4></span><br>
                             <% } %>
                         </div>
-                        <div class="col s2 d-flex justify-content-between align-items-center">
+                        <div class="col s2 d-flex justify-content-center align-items-center">
                             <label>
                              <%  if(user && books[i].ownersname==user.username){ %>
                                 <i id="<%= books[i]._id %>" class="material-icons">cancel</i>
@@ -43,7 +42,12 @@
        </div>
         <div class="row ">
             <div class="col s12 center-align">
-                    <a class="waves-effect waves-light btn">Create Request</a>
+           <% if(user){ %>
+                 <a class="waves-effect waves-light btn" href="#">Create Request</a>
+           <% }else{ %>
+                <a class="waves-effect waves-light btn" href="#">Sign in to submit request </a>
+           <% } %>
+                   
             </div>
         </div>
     </div>
