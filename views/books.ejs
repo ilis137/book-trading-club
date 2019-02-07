@@ -20,12 +20,12 @@
                             </label>
                         </div>
                         <div class="col s8  text-left">
-                           <span><h3><%= books[i].title %></h3></span><br>
-                           <span><h4><%= books[i].author %></h4></span><br>
+                           <span id="book-title"><h3 id="book-title"><%= books[i].title %></h3></span><br>
+                           <span><h4 id="book-author"><%= books[i].author %></h4></span><br>
                            <% if(books[i].city){ %>
-                           <span><h4><%= books[i].ownersname %> from <%= books[i].city %></h4></span><br>
+                           <span><h4 ><span id="ownersname"><%= books[i].ownersname %></span> from <span id="city" ><%= books[i].city %></span></h4></span><br>
                            <% }else{ %>
-                           <span><h4><%= books[i].ownersname %> </h4></span><br>
+                           <span><h4><span><%= books[i].ownersname %></span> </h4></span><br>
                             <% } %>
                         </div>
                         <div class="col s2 d-flex justify-content-center align-items-center">
@@ -44,7 +44,7 @@
         <div class="row ">
             <div class="col s12 center-align">
            <% if(user){ %>
-                 <a class="waves-effect waves-light btn" href="#">Create Request</a>
+                 <a class="waves-effect waves-light btn" href="/createRequest" id="createRequest">Create Request</a>
            <% }else{ %>
                 <a class="waves-effect waves-light btn" href="#">Sign in to submit request </a>
            <% } %>
@@ -71,14 +71,28 @@ $(function(){
                 }
             })
         })
-    // $(".select").click(function(event){
-    //       const id=$(this).attr("id")
-    //       const user=<%= user %>
-    //       if(id==user._id ){
-    //             localStorage.setItem(id+"")
-    //       }
+    $(".select").click(function(event){
+     
+          const id=$(this).attr("id")
+          const user=<%= user %>
+
+          
+          if(id==user._id ){
+              const title=$("#book-title").text()
+              const author=$("#book-author").text()
+              const requestersname=$("#ownersname").text()
+              sessionStorage.setItem("give",{title:title,author:author,requestersname:requestersname})
+          }else{
+              const title=$("#book-title").text()
+              const author=$("#book-author").text()
+              const requestersname=$("#ownersname").text()
+              const city=$("#city").text()
+              sessionStorage.setItem("take",{title:title,author:author,requestersname:requestersname})
+           }
             
-    // })
+    })
+
+   
 })
 
 </script>
