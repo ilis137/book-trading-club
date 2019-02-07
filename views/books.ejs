@@ -74,7 +74,7 @@ $(function(){
     $(".select").click(function(event){
      
             const id=$(this).attr("id")
-            const user=<%= (user)? user:null %>
+            const user= (<%=user %>)?<%= user%>:null 
 
           if(user){
                 if(id==user._id ){
