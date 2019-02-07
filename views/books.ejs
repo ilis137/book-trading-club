@@ -74,9 +74,9 @@ $(function(){
     $(".select").click(function(event){
      
             const id=$(this).attr("id")
-            const username="<%= user.username %>"
+            const user=<%= (user)? user:null %>
 
-          if(username){
+          if(user){
                 if(id==user._id ){
                     const title=$("#book-title").text()
                     const author=$("#book-author").text()
@@ -88,8 +88,8 @@ $(function(){
                     const requestersname=$("#ownersname").text()
                     const city=$("#city").text()
                     sessionStorage.setItem("take",{title:title,author:author,requestersname:requestersname})
-           }
-          }
+                }
+        }
           
             
     })
