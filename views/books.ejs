@@ -73,22 +73,24 @@ $(function(){
         })
     $(".select").click(function(event){
      
-          const id=$(this).attr("id")
-          const user="<%= user %>"
+            const id=$(this).attr("id")
+            const username="<%= user.username %>"
 
-          
-          if(id==user._id ){
-              const title=$("#book-title").text()
-              const author=$("#book-author").text()
-              const requestersname=$("#ownersname").text()
-              sessionStorage.setItem("give",{title:title,author:author,requestersname:requestersname})
-          }else{
-              const title=$("#book-title").text()
-              const author=$("#book-author").text()
-              const requestersname=$("#ownersname").text()
-              const city=$("#city").text()
-              sessionStorage.setItem("take",{title:title,author:author,requestersname:requestersname})
+          if(username){
+                if(id==user._id ){
+                    const title=$("#book-title").text()
+                    const author=$("#book-author").text()
+                    const requestersname=$("#ownersname").text()
+                    sessionStorage.setItem("give",{title:title,author:author,requestersname:requestersname})
+                }else{
+                    const title=$("#book-title").text()
+                    const author=$("#book-author").text()
+                    const requestersname=$("#ownersname").text()
+                    const city=$("#city").text()
+                    sessionStorage.setItem("take",{title:title,author:author,requestersname:requestersname})
            }
+          }
+          
             
     })
 
