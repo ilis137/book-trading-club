@@ -74,10 +74,10 @@ $(function(){
     $(".select").click(function(event){
      
             const id=$(this).attr("id")
-            const user= (<%=user %>)?<%= user%>:null 
-
-          if(user){
-                if(id==user._id ){
+            const username="<%= (user)?user.username:'' %>"
+            const userid="<%= (user)?user._id:'' %>"
+          if(username!==""){
+                if(id==userid ){
                     const title=$("#book-title").text()
                     const author=$("#book-author").text()
                     const requestersname=$("#ownersname").text()
@@ -88,8 +88,8 @@ $(function(){
                     const requestersname=$("#ownersname").text()
                     const city=$("#city").text()
                     sessionStorage.setItem("take",{title:title,author:author,requestersname:requestersname})
-                }
-        }
+           }
+          }
           
             
     })
