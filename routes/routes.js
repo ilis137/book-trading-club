@@ -212,11 +212,9 @@ module.exports = app => {
   //API to get my requests
   app.get("/createRequests", (req, res) => {
     const { username } = req.user;
-    request.find({ requestersName: username }).then(requests => {
-      res.render("requests", {
-        requests: requests,
-        user: req.user
-      });
+
+    res.render("requests", {
+      user: req.user
     });
   });
 
