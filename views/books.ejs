@@ -14,10 +14,13 @@
                 <div class="card ">
                         <div class="card-content text-center">
                         <div class="col s2  " style="height:100%">
+                        <% if(user){ %>
                             <label for="<%= books[i]._id %>">
+                            
                                 <input type="checkbox" class="filled-in select" id="<%= user._id %>" data-title="<%= books[i].title %>" data-author="<%= books[i].author%>" data-ownersname="<%= books[i].ownersname %>" data-city="<%= books[i].city %>"/>
                                 <span></span>
                             </label>
+                        <% }%>
                         </div>
                         <div class="col s8  text-left">
                            <span id="book-title"><h3 id="book-title"><%= books[i].title %></h3></span><br>
