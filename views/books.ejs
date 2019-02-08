@@ -77,24 +77,30 @@ $(function(){
     $(".select").click(function(event){
      
             const id=this.dataset.user
-           console.log($(this))
+            const checked=this.checked
             const userid="<%= (user)?user._id:'' %>"
-          if(userid){
-                if(id==userid ){
+          
+                if(id==userid && checked ){
                     const title=this.dataset.title
                     const author=this.dataset.author
                     const requestersname=this.dataset.ownersname
                     sessionStorage.setItem("give",JSON.stringify({title:title,author:author,requestersname:requestersname}))
-                }else{
+                }else if(id==userid && !checked ){ 
+
+                   sessionStorage.removeItem("give")
+
+                }else if(id!=userid && checked ){
+
                     const title=this.dataset.title
                     const author=this.dataset.author
-                    const requestersname=this.dataset.ownersname
+                    const ownersname=this.dataset.ownersname
                     const city=this.dataset.city
-                    sessionStorage.setItem("take",JSON.stringify({title:title,author:author,requestersname:requestersname}))
-           }
-          }
-          
-            
+                    sessionStorage.setItem("take",JSON.stringify({title:title,author:author,ownersname:ownersname}))
+                }else{
+                   
+                    sessionStorage.removeItem("take")
+
+                }
     })
 
    
