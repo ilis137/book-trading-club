@@ -77,7 +77,7 @@ $(function(){
     $(".select").click(function(event){
      
             const id=this.dataset.user
-           console.log($(this).attr("checked"))
+           console.log($(this:checked))
             const userid="<%= (user)?user._id:'' %>"
           if(userid){
                 if(id==userid ){
