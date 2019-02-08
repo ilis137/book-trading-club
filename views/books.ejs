@@ -15,7 +15,7 @@
                         <div class="card-content text-center">
                         <div class="col s2  " style="height:100%">
                             <label for="<%= books[i]._id %>">
-                                <input type="checkbox" class="filled-in select" id="<%= books[i]._id %>" />
+                                <input type="checkbox" class="filled-in select" id="<%= user._id %>" data-title="<%= books[i].title %>" data-author="<%= books[i].author%>" data-ownersname="<%= books[i].ownersname %>" data-city="<%= books[i].city %>"/>
                                 <span></span>
                             </label>
                         </div>
@@ -74,19 +74,19 @@ $(function(){
     $(".select").click(function(event){
      
             const id=$(this).attr("id")
-            const username="<%= (user)?user.username:'' %>"
+           console.log($(this).attr("checked"))
             const userid="<%= (user)?user._id:'' %>"
-          if(username!==""){
+          if(userid){
                 if(id==userid ){
-                    const title=$("#book-title").text()
-                    const author=$("#book-author").text()
-                    const requestersname=$("#ownersname").text()
+                    const title=this.dataset.title
+                    const author=this.dataset.author
+                    const requestersname=this.dataset.ownersname
                     sessionStorage.setItem("give",{title:title,author:author,requestersname:requestersname})
                 }else{
-                    const title=$("#book-title").text()
-                    const author=$("#book-author").text()
-                    const requestersname=$("#ownersname").text()
-                    const city=$("#city").text()
+                    const title=this.dataset.title
+                    const author=this.dataset.author
+                    const requestersname=this.dataset.ownersname
+                    const city=this.dataset.city
                     sessionStorage.setItem("take",{title:title,author:author,requestersname:requestersname})
            }
           }
