@@ -79,20 +79,20 @@ $(function(){
             const id=$(this).attr("id")
            console.log($(this).attr("checked"))
             const userid="<%= (user)?user._id:'' %>"
-          if(userid){
-                if(id==userid ){
-                    const title=this.dataset.title
-                    const author=this.dataset.author
-                    const requestersname=this.dataset.ownersname
-                    sessionStorage.setItem("give",{title:title,author:author,requestersname:requestersname})
-                }else{
-                    const title=this.dataset.title
-                    const author=this.dataset.author
-                    const requestersname=this.dataset.ownersname
-                    const city=this.dataset.city
-                    sessionStorage.setItem("take",{title:title,author:author,requestersname:requestersname})
-           }
-          }
+        //   if(userid){
+        //         if(id==userid ){
+        //             const title=this.dataset.title
+        //             const author=this.dataset.author
+        //             const requestersname=this.dataset.ownersname
+        //             sessionStorage.setItem("give",{title:title,author:author,requestersname:requestersname})
+        //         }else{
+        //             const title=this.dataset.title
+        //             const author=this.dataset.author
+        //             const requestersname=this.dataset.ownersname
+        //             const city=this.dataset.city
+        //             sessionStorage.setItem("take",{title:title,author:author,requestersname:requestersname})
+        //    }
+        //   }
           
             
     })
