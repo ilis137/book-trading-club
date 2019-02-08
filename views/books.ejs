@@ -84,13 +84,13 @@ $(function(){
                     const title=this.dataset.title
                     const author=this.dataset.author
                     const requestersname=this.dataset.ownersname
-                    sessionStorage.setItem("give",{title:title,author:author,requestersname:requestersname})
+                    sessionStorage.setItem("give",JSON.stringify({title:title,author:author,requestersname:requestersname}))
                 }else{
                     const title=this.dataset.title
                     const author=this.dataset.author
                     const requestersname=this.dataset.ownersname
                     const city=this.dataset.city
-                    sessionStorage.setItem("take",{title:title,author:author,requestersname:requestersname})
+                    sessionStorage.setItem("take",JSON.stringify({title:title,author:author,requestersname:requestersname}))
            }
           }
           
