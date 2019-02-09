@@ -166,10 +166,6 @@ module.exports = app => {
       });
   });
 
-  // app.post("/select/book/give", (req, res) => {
-
-  // })
-
   //API to select book to take
   app.get("/select/book/take", (req, res) => {
     const { username } = req.user;
@@ -220,24 +216,39 @@ module.exports = app => {
   //API to get my requests
   app.get("/createRequests", (req, res) => {
     const { username } = req.user;
-
-    res.render("requests", {
-      user: req.user
+    Request.find({ requestersname: username }).then(requests => {
+      requests.map(request => {
+        Book.findOne({
+          ownersname: request.requestersrsname,
+          title: request.offeredBook
+        }).then(book => {
+          request.offeredBookAuthor = book.author;
+        });
+        Book.findOne({
+          ownersname: request.ownersname,
+          title: request.requestedBook
+        }).then(book => {
+          request.requestedBookAuthor = book.author;
+        });
+      });
+      res.render("requests", {
+        user: req.user,
+        requests: requests
+      });
     });
   });
 
   //API to delete my request
   app.delete("/delete/request", (req, res) => {
     const { id } = req.body;
-    request.findByIdAndDelete(id).then(() => {
+    Request.findByIdAndDelete(id).then(() => {
       res.redirect("/createRequests");
     });
   });
   //API to accept request
   app.post("/accept/request", (req, res) => {
     const { id } = req.body;
-    request
-      .findByIdAndUpdate(id, { status: "completed" }, { new: true })
+    Request.findByIdAndUpdate(id, { status: "completed" }, { new: true })
       .then(() => {
         res.redirect("/books");
       })
@@ -248,8 +259,7 @@ module.exports = app => {
   //API to cancel request
   app.post("/cancel/request", (req, res) => {
     const { id } = req.body;
-    request
-      .findByIdAndUpdate(id, { status: "canceled" }, { new: true })
+    Request.findByIdAndUpdate(id, { status: "canceled" }, { new: true })
       .then(() => {
         res.redirect("/books");
       })
