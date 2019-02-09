@@ -48,11 +48,9 @@
             <div class="col s12 center-align">
             <% if(user && url=="/select/book/give"){ %>
                     <a class="waves-effect waves-light btn" href="/createRequests" id="continuetogive">Continue</a>
-            <% } %>
-             <% else if(user && url=="/select/book/take"){ %>
+            <% } else if(user && url=="/select/book/take"){ %>
                     <a class="waves-effect waves-light btn" href="/createRequests" id="continuetotake">Continue</a>
-            <% } %>
-           <% else if(user){ %>
+            <% } else if(user){ %>
                  <a class="waves-effect waves-light btn" href="/createRequests" id="createRequest">Create Request</a>
            <% }else{ %>
                 <a class="waves-effect waves-light btn" href="#">Sign in to submit request </a>
