@@ -152,10 +152,11 @@ module.exports = app => {
 
   //API to select book to give
   app.get("/select/book/give", (req, res) => {
+    console.log(req.route.path);
     const { username } = req.user;
-    Book.find({ ownersname: req.user.username })
+    Book.find({ ownersname: username })
       .then(books => {
-        res.render("Books", { books: books, user: req.user });
+        res.render("books", { books: books, user: req.user });
       })
       .catch(err => {
         throw err;
@@ -182,7 +183,7 @@ module.exports = app => {
               throw err;
             });
         });
-        res.render("Books", { books: books, user: req.user });
+        res.render("books", { books: books, user: req.user });
       })
       .catch(err => {
         throw err;
