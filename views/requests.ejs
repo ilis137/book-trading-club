@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ./partials/head %>
+</head>
+<body>
+    <% include ./partials/navbar %>
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="card">
+                   <div class="card-content">
+                        <div class="row">
+                            <div class="col s12 py-2">
+                                <h2 class="center-align">Make A Request For Trade</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s6 py-2 ">
+                                <h2><%= user.username %> wants to give:</h2>
+                                <li class="give list-group-item"></li>
+                                <a href="/select/book/give" class="waves-effect btn-flat" >Edit Books To Give</a>
+                            </div>
+                            <div class="col s6 py-2 take">
+                                <h2>and wants to give:</h2>
+                                <a href="/select/book/take" class="waves-effect btn-flat">Edit Books To Take</a>
+                                <li class="take list-group-item"></li>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="s12 col center-align">
+                                <button type="button" class="btn btn-primary">Make Request</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    $(function(){
+        const give=JSON.parse(sessionStorage.getItem("give"))
+        const take=JSON.parse(sessionStorage.getItem("take"))    
+
+        if(give){
+                const requestersname =give.requestersname
+                const title=give.title
+                const author=give.author
+                var html=""
+                html+="<h2>"+title+"</h2>"
+                html+="<h5>"+author+"</h5>"
+                document.querySelector("#give").innerHTML=html   
+            }
+        if(take){
+                   
+                const title=take.title
+                const author=take.author
+                var html=""
+                html+="<h2>"+title+"</h2>"
+                html+="<h5>"+author+"</h5>"
+                document.querySelector("#take").innerHTML=html   
+            }
+        })
+    </script>
+
+</body>
+</html>
