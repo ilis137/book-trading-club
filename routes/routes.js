@@ -152,11 +152,14 @@ module.exports = app => {
 
   //API to select book to give
   app.get("/select/book/give", (req, res) => {
-    console.log(req.route.path);
     const { username } = req.user;
     Book.find({ ownersname: username })
       .then(books => {
-        res.render("books", { books: books, user: req.user });
+        res.render("books", {
+          books: books,
+          user: req.user,
+          url: req.route.path
+        });
       })
       .catch(err => {
         throw err;
