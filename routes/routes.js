@@ -143,7 +143,7 @@ module.exports = app => {
               throw err;
             });
         });
-        res.render("books", { books: books, user: req.user });
+        res.render("books", { books: books, user: req.user, url: "" });
       })
       .catch(err => {
         throw err;
@@ -186,7 +186,11 @@ module.exports = app => {
               throw err;
             });
         });
-        res.render("books", { books: books, user: req.user });
+        res.render("books", {
+          books: books,
+          user: req.user,
+          url: req.route.path
+        });
       })
       .catch(err => {
         throw err;
