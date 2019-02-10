@@ -91,6 +91,15 @@
                 html+="<h5>"+author+"</h5>"
                 document.querySelector(".take").innerHTML=html   
             }
+
+
+            $.ajax({
+                url:"https://book-trading-iliyas.herokuapp.com/makeRequest",
+                method:"POST"
+                complete:function(){
+                    window.location.reload(true)
+                }
+            })
         })
     </script>
 
