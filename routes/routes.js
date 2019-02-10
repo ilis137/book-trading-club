@@ -216,10 +216,10 @@ module.exports = app => {
   //API to get my requests
   app.get("/createRequests", (req, res) => {
     const { username } = req.user;
-    Request.find({ requestersname: username }).then(requests => {
+    Request.find({ requestersName: username }).then(requests => {
       requests.map(request => {
         Book.findOne({
-          ownersname: request.requestersrsname,
+          ownersname: request.requestersrsName,
           title: request.offeredBook
         }).then(book => {
           request.offeredBookAuthor = book.author;
