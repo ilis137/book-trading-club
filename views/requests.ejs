@@ -30,7 +30,7 @@
                         </div>
                         <div class="row">
                             <div class="s12 col center-align">
-                                <button type="button" class="btn btn-primary">Make Request</button>
+                                <button type="button" class="btn btn-primary" id="make-request">Make Request</button>
                             </div>
                         </div>
                     </div>
@@ -92,14 +92,23 @@
                 document.querySelector(".take").innerHTML=html   
             }
 
-
-            $.ajax({
+            $("#make-request").click(function(){
+          
+                 $.ajax({
                 url:"https://book-trading-iliyas.herokuapp.com/makeRequest",
-                method:"POST"
+                method:"POST",
+                data:{
+                   requestersName:give.requestersname,
+                   offeredBook:give.title
+                   requestedBook:take.title,
+                   ownersName:take.ownersname
+                },
                 complete:function(){
                     window.location.reload(true)
                 }
             })
+            })
+           
         })
     </script>
 
