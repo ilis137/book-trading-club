@@ -223,6 +223,7 @@ module.exports = app => {
         ownersname: request.requestersName,
         title: request.offeredBook
       });
+      console.log(book);
       request.offeredBookAuthor = await book.author;
 
       book = await Book.findOne({
