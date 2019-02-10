@@ -214,28 +214,30 @@ module.exports = app => {
   });
 
   //API to get my requests
-  app.get("/createRequests", (req, res) => {
+  app.get("/createRequests", async (req, res) => {
     const { username } = req.user;
-    Request.find({ requestersName: username }).then(requests => {
+    const requests = await Request.find({ requestersName: username });
+
+   
       requests.map(request => {
-        Book.findOne({
+       const book=await Book.findOne({
           ownersname: request.requestersrsName,
           title: request.offeredBook
-        }).then(book => {
-          request.offeredBookAuthor = book.author;
-        });
-        Book.findOne({
+        })
+        request.offeredBookAuthor = book.author;
+       
+         book=await Book.findOne({
           ownersname: request.ownersname,
           title: request.requestedBook
-        }).then(book => {
+        })
           request.requestedBookAuthor = book.author;
-        });
+   
       });
       res.render("requests", {
         user: req.user,
         requests: requests
       });
-    });
+    
   });
 
   //API to delete my request
