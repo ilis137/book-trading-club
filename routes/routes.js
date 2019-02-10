@@ -220,7 +220,7 @@ module.exports = app => {
 
     requests = requests.map(async request => {
       let book = await Book.findOne({
-        ownersname: request.requestersrsName,
+        ownersname: request.requestersName,
         title: request.offeredBook
       });
       request.offeredBookAuthor = book.author;
