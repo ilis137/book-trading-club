@@ -195,12 +195,12 @@ module.exports = app => {
 
   //API to make a request
   app.post("/makeRequest", (req, res) => {
-    const { requestersName, offeredBook, requestedBook, ownersname } = req.body;
+    const { requestersName, offeredBook, requestedBook, ownersName } = req.body;
     const request = new Request({
       requestersName: requestersName,
       offeredBook: offeredBook,
       requestedBook: requestedBook,
-      ownersname: ownersname,
+      ownersname: ownersName,
       status: "pending"
     });
     request
