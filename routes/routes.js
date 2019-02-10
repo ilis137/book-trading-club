@@ -217,7 +217,7 @@ module.exports = app => {
   app.get("/createRequests", async (req, res) => {
     const { username } = req.user;
     let requests = await Request.find({ requestersName: username });
-
+    console.log(requests);
     requests = requests.map(async request => {
       let book = await Book.findOne({
         ownersname: request.requestersName,
@@ -231,7 +231,7 @@ module.exports = app => {
       });
       request.requestedBookAuthor = book.author;
     });
-    console.log(requests);
+
     res.render("requests", {
       user: req.user,
       requests: requests
