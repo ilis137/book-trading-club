@@ -216,9 +216,9 @@ module.exports = app => {
   //API to get my requests
   app.get("/createRequests", async (req, res) => {
     const { username } = req.user;
-    const requests = await Request.find({ requestersName: username });
+    let requests = await Request.find({ requestersName: username });
 
-    requests.map(async request => {
+    requests = requests.map(async request => {
       let book = await Book.findOne({
         ownersname: request.requestersrsName,
         title: request.offeredBook
