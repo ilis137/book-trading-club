@@ -16,7 +16,7 @@
                         <div class="col s2  " style="height:100%">
                         <% if(user){ %>
                             <label for="<%= books[i]._id %>">
-                                 <% if(user.username==book[i].ownersname) {%>
+                                 <% if(user.username==books[i].ownersname) {%>
                                 <input type="checkbox" class="filled-in select" id="<%= books[i]._id %>" data-user="<%= user._id %>"data-title="<%= books[i].title %>" data-author="<%= books[i].author%>" data-ownersname="<%= books[i].ownersname %>" data-city="<%= books[i].city %>"/>
                                 <% }else{ %>
                                 <input type="checkbox" class="filled-in select" id="<%= books[i]._id %>" data-user=""data-title="<%= books[i].title %>" data-author="<%= books[i].author%>" data-ownersname="<%= books[i].ownersname %>" data-city="<%= books[i].city %>"/>
