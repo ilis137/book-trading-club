@@ -218,26 +218,23 @@ module.exports = app => {
     const { username } = req.user;
     const requests = await Request.find({ requestersName: username });
 
-   
-      requests.map(request => {
-       const book=await Book.findOne({
-          ownersname: request.requestersrsName,
-          title: request.offeredBook
-        })
-        request.offeredBookAuthor = book.author;
-       
-         book=await Book.findOne({
-          ownersname: request.ownersname,
-          title: request.requestedBook
-        })
-          request.requestedBookAuthor = book.author;
-   
+    requests.map(async request => {
+      const book = await Book.findOne({
+        ownersname: request.requestersrsName,
+        title: request.offeredBook
       });
-      res.render("requests", {
-        user: req.user,
-        requests: requests
+      request.offeredBookAuthor = book.author;
+
+      book = await Book.findOne({
+        ownersname: request.ownersname,
+        title: request.requestedBook
       });
-    
+      request.requestedBookAuthor = book.author;
+    });
+    res.render("requests", {
+      user: req.user,
+      requests: requests
+    });
   });
 
   //API to delete my request
