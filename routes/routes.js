@@ -219,7 +219,7 @@ module.exports = app => {
     const requests = await Request.find({ requestersName: username });
 
     requests.map(async request => {
-      const book = await Book.findOne({
+      let book = await Book.findOne({
         ownersname: request.requestersrsName,
         title: request.offeredBook
       });
