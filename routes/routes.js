@@ -223,13 +223,13 @@ module.exports = app => {
         ownersname: request.requestersName,
         title: request.offeredBook
       });
-      request.offeredBookAuthor = book.author;
+      request.offeredBookAuthor = await book.author;
 
       book = await Book.findOne({
         ownersname: request.ownersname,
         title: request.requestedBook
       });
-      request.requestedBookAuthor = book.author;
+      request.requestedBookAuthor = await book.author;
     });
 
     res.render("requests", {
