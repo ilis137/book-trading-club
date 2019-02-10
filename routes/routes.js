@@ -231,6 +231,7 @@ module.exports = app => {
       });
       request.requestedBookAuthor = book.author;
     });
+    console.log(requests);
     res.render("requests", {
       user: req.user,
       requests: requests
