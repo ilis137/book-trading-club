@@ -143,6 +143,7 @@ module.exports = app => {
               throw err;
             });
         });
+        console.log(books[0].city);
         res.render("books", { books: books, user: req.user, url: "" });
       })
       .catch(err => {
@@ -216,23 +217,27 @@ module.exports = app => {
   //API to get my requests
   app.get("/createRequests", async (req, res) => {
     const { username } = req.user;
+    // const username = "ilshh";
     let requests = await Request.find({ requestersName: username });
-    console.log(requests);
+
     requests = requests.map(async request => {
       let book = await Book.findOne({
         ownersname: request.requestersName,
         title: request.offeredBook
       });
-      console.log(book);
-      request.offeredBookAuthor = await book.author;
 
+      request.offeredBookAuthor = book.author;
+      // console.log(book.author);
+      // console.log(request.offeredBookAuthor);
       book = await Book.findOne({
         ownersname: request.ownersname,
         title: request.requestedBook
       });
-      request.requestedBookAuthor = await book.author;
+      // console.log(request.offeredBookAuthor);
+      request.requestedBookAuthor = book.author;
     });
-
+    console.log(requests);
+    res.send(requests);
     res.render("requests", {
       user: req.user,
       requests: requests
