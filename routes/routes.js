@@ -129,7 +129,7 @@ module.exports = app => {
   });
   //API to get all books for trade
   app.get("/books", (req, res) => {
-    console.log(req.user);
+    //console.log(req.user);
 
     Book.find({})
       .then(books => {
