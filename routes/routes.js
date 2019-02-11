@@ -238,11 +238,11 @@ module.exports = app => {
       return request;
     });
     console.log(requests);
-
-    res.render("requests", {
-      user: req.user,
-      requests: requests
-    });
+    res.send(requests);
+    // res.render("requests", {
+    //   user: req.user,
+    //   requests: requests
+    // });
   });
 
   //API to delete my request
