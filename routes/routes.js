@@ -238,7 +238,7 @@ module.exports = app => {
       return request;
     });
     console.log(requests);
-    res.send(requests);
+
     res.render("requests", {
       user: req.user,
       requests: requests
