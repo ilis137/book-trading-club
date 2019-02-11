@@ -134,7 +134,7 @@ module.exports = app => {
     Book.find({})
       .then(books => {
         books.map(book => {
-          User.find({ username: book.ownersname })
+          return User.find({ username: book.ownersname })
             .then(user => {
               if (user.city) book.city = user.city;
               else book.city = "";
@@ -235,6 +235,7 @@ module.exports = app => {
       });
       // console.log(request.offeredBookAuthor);
       request.requestedBookAuthor = book.author;
+      return request;
     });
     console.log(requests);
     res.send(requests);
