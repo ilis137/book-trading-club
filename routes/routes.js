@@ -143,7 +143,7 @@ module.exports = app => {
               throw err;
             });
         });
-        //console.log(books[0].city);
+        console.log(books[0].city);
         res.render("books", { books: books, user: req.user, url: "" });
       })
       .catch(err => {
