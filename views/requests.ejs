@@ -105,6 +105,7 @@
 
             $("#make-request").click(function(){
           
+                
                  $.ajax({
                 url:"https://book-trading-iliyas.herokuapp.com/makeRequest",
                 method:"POST",
@@ -115,9 +116,12 @@
                    ownersName:take.ownersname
                 },
                 complete:function(){
+                    localStorage.removeItem("give")
+                    localStorage.removeItem("take")
                     window.location.assign("/books")
                 }
             })
+
             })
            
         })
