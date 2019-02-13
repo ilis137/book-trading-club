@@ -261,6 +261,7 @@ module.exports = app => {
   //API to delete my request
   app.delete("/delete/request", (req, res) => {
     const { id } = req.body;
+    console.log(id);
     Request.findByIdAndDelete(id)
       .then(() => {
         res.redirect("/createRequests");
