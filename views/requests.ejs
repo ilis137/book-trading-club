@@ -126,7 +126,7 @@
             $(".delete-request").click(function(){
                 console.log(this.id)
             $.ajax({
-                    url:"https://book-trading-iliyas.herokuapp.com/cancel/request",
+                    url:"https://book-trading-iliyas.herokuapp.com/delete/request",
                      method:"POST",
                      data:{
                      id:this.id
