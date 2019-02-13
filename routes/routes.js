@@ -128,27 +128,30 @@ module.exports = app => {
       });
   });
   //API to get all books for trade
-  app.get("/books", (req, res) => {
+  app.get("/books", async (req, res) => {
     //console.log(req.user);
 
-    Book.find({})
-      .then(books => {
-        books.map(book => {
-          return User.find({ username: book.ownersname })
-            .then(user => {
-              if (user.city) book.city = user.city;
-              else book.city = "";
-            })
-            .catch(err => {
-              throw err;
-            });
-        });
-        console.log(books[0].city);
-        res.render("books", { books: books, user: req.user, url: "" });
-      })
-      .catch(err => {
-        throw err;
-      });
+    let books = await Book.find({});
+    let newBooks = [];
+    //console.log(books);
+    usersPromises = books.map(book => {
+      let userPromise = User.findOne({ username: book.ownersname });
+      return userPromise;
+    });
+    const users = await Promise.all(usersPromises);
+    let i = 0;
+    books = books.map(book => {
+      if (users[i].city) {
+        book.city = users[i].city;
+      } else {
+        book.city = "";
+      }
+      i++;
+      return book;
+    });
+
+    //res.send(books);
+    res.render("books", { books: books, user: req.user, url: "" });
   });
 
   //API to select book to give
@@ -217,32 +220,42 @@ module.exports = app => {
   //API to get my requests
   app.get("/createRequests", async (req, res) => {
     const { username } = req.user;
-    // const username = "ilshh";
+    //const username = "ilshh";
     let requests = await Request.find({ requestersName: username });
 
-    requests.map(async request => {
-      let book = await Book.findOne({
+    let offeredBookPromises = requests.map(request => {
+      offeredBookPromise = Book.findOne({
         ownersname: request.requestersName,
         title: request.offeredBook
       });
-
-      request.offeredBookAuthor = book.author;
-      // console.log(book.author);
-      // console.log(request.offeredBookAuthor);
-      book = await Book.findOne({
+      return offeredBookPromise;
+    });
+    requestedBookPromises = requests.map(request => {
+      requestedBookPromise = Book.findOne({
         ownersname: request.ownersname,
         title: request.requestedBook
       });
-      // console.log(request.offeredBookAuthor);
-      request.requestedBookAuthor = book.author;
-      return request;
+      return requestedBookPromise;
     });
-    console.log(requests);
-    res.send(requests);
-    // res.render("requests", {
-    //   user: req.user,
-    //   requests: requests
-    // });
+
+    const offeredBooks = await Promise.all(offeredBookPromises);
+    const requestedBooks = await Promise.all(requestedBookPromises);
+    let i = 0;
+    offeredBooks.map(offeredBook => {
+      requests[i].offeredBookAuthor = offeredBook.author;
+      i++;
+    });
+
+    i = 0;
+    requestedBooks.map(requestedBook => {
+      requests[i].requestedBookAuthor = requestedBook.author;
+      i++;
+    });
+
+    res.render("requests", {
+      user: req.user,
+      requests: requests
+    });
   });
 
   //API to delete my request
