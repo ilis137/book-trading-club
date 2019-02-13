@@ -75,7 +75,7 @@
             </div>
             <div class="col-md-6 col-sm-12">
             
-            
+            <!--Add requests send to you-->
             </div>
         </div>
     </div>
@@ -122,6 +122,21 @@
                 }
             })
 
+            })
+            $("#delete-request").click(function(){
+                   $.ajax({
+                url:"https://book-trading-iliyas.herokuapp.com//cancel/request",
+                method:"POST",
+                data:{
+                   id:this.id
+                },
+                complete:function(){
+                   
+                    window.location.assign("/createRequests")
+                }
+            })
+
+            })
             })
            
         })
