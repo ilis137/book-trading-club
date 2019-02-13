@@ -116,8 +116,8 @@
                    ownersName:take.ownersname
                 },
                 complete:function(){
-                    localStorage.removeItem("give")
-                    localStorage.removeItem("take")
+                    sessionStorage.removeItem("give")
+                    sessionStorage.removeItem("take")
                     window.location.assign("/books")
                 }
             })
