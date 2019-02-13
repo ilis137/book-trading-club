@@ -124,6 +124,7 @@
 
             })
             $(".delete-request").click(function(){
+                console.log(this.id)
             $.ajax({
                     url:"https://book-trading-iliyas.herokuapp.com/cancel/request",
                      method:"POST",
