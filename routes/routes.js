@@ -279,7 +279,7 @@ module.exports = app => {
   //API to cancel request
   app.post("/cancel/request", (req, res) => {
     const { id } = req.body;
-    Request.findByIdAndUpdate(id, { status: "canceled" }, { new: true })
+    Request.findByIdAndRemove(id)
       .then(() => {
         res.redirect("/books");
       })
