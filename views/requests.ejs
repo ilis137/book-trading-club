@@ -124,16 +124,15 @@
 
             })
             $(".delete-request").click(function(){
-                   $.ajax({
-                url:"https://book-trading-iliyas.herokuapp.com//cancel/request",
-                method:"POST",
-                data:{
-                   id:this.id
-                },
-                complete:function(){
-                   
-                    window.location.assign("/createRequests")
-                }
+            $.ajax({
+                    url:"https://book-trading-iliyas.herokuapp.com/cancel/request",
+                     method:"POST",
+                     data:{
+                     id:this.id
+                    },
+                    complete:function(){
+                        window.location.assign("/createRequests")
+                    }
             })
 
             })
