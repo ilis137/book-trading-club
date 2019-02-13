@@ -261,9 +261,13 @@ module.exports = app => {
   //API to delete my request
   app.delete("/delete/request", (req, res) => {
     const { id } = req.body;
-    Request.findByIdAndDelete(id).then(() => {
-      res.redirect("/createRequests");
-    });
+    Request.findByIdAndDelete(id)
+      .then(() => {
+        res.redirect("/createRequests");
+      })
+      .catch(err => {
+        throw err;
+      });
   });
   //API to accept request
   app.post("/accept/request", (req, res) => {
