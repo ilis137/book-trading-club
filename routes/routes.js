@@ -242,7 +242,12 @@ module.exports = app => {
     const requestedBooks = await Promise.all(requestedBookPromises);
     const users = await Promise.all(usersPromises);
 
-    return { offeredRequests, offeredBooks, requestedBooks, users };
+    return {
+      offeredRequests,
+      offeredBooksForRequest: offeredBooks,
+      requestedBooksForRequest: requestedBooks,
+      users
+    };
   };
 
   const getMyRequests = async username => {
@@ -290,8 +295,8 @@ module.exports = app => {
 
     let {
       offeredRequests,
-      offeredBooksForRequest: offeredBooks,
-      requestedBooksForRequest: requestedBooks,
+      offeredBooksForRequest,
+      requestedBooksForRequest,
       users
     } = getOfferedRequests(username);
 
