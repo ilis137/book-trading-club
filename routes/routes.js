@@ -234,7 +234,7 @@ module.exports = app => {
       });
       return requestedBookPromise;
     });
-    let offeredBookPromises = offeredRequests.map(request => {
+    let usersPromises = offeredRequests.map(request => {
       usersPromises = User.findOne({ username: request.requestersName });
     });
 
