@@ -290,8 +290,8 @@ module.exports = app => {
 
     let {
       offeredRequests,
-      offeredBooksForRequest,
-      requestedBooksForRequest,
+      offeredBooksForRequest: offeredBooks,
+      requestedBooksForRequest: requestedBooks,
       users
     } = getOfferedRequests(username);
 
