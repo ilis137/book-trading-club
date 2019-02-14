@@ -245,7 +245,9 @@ module.exports = app => {
   app.get("/createRequests", async (req, res) => {
     const { username } = req.user;
     //const username = "ilshh";
-    let { requests, offeredBooks, requestedBooks } = getMyRequests(username);
+    let { requests, offeredBooks, requestedBooks } = await getMyRequests(
+      username
+    );
     let i = 0;
     offeredBooks.map(offeredBook => {
       requests[i].offeredBookAuthor = offeredBook.author;
