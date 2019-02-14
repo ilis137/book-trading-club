@@ -298,7 +298,7 @@ module.exports = app => {
       offeredBooksForRequest,
       requestedBooksForRequest,
       users
-    } = getOfferedRequests(username);
+    } = await getOfferedRequests(username);
 
     i = 0;
     offeredBooksForRequest.map(offeredBook => {
