@@ -295,7 +295,7 @@ module.exports = app => {
       users
     } = getOfferedRequests(username);
 
-    let i = 0;
+    i = 0;
     offeredBooksForRequest.map(offeredBook => {
       offeredRequests[i].offeredBookAuthor = offeredBook.author;
       i++;
