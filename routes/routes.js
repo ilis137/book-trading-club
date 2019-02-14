@@ -313,7 +313,7 @@ module.exports = app => {
     });
 
     users.map((user, i) => {
-      if (users[i].city) {
+      if (user.city) {
         offeredRequests[i].city = user.city;
       } else {
         offeredRequests[i].city = "";
