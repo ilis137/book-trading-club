@@ -236,6 +236,7 @@ module.exports = app => {
     });
     let usersPromises = offeredRequests.map(request => {
       User.findOne({ username: request.requestersName });
+      return userPromise;
     });
 
     const offeredBooks = await Promise.all(offeredBookPromises);
