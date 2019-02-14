@@ -299,7 +299,7 @@ module.exports = app => {
       requestedBooksForRequest,
       users
     } = await getOfferedRequests(username);
-
+    console.log(offeredBooksForRequest);
     i = 0;
     offeredBooksForRequest.map(offeredBook => {
       offeredRequests[i].offeredBookAuthor = offeredBook.author;
