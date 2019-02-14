@@ -217,6 +217,34 @@ module.exports = app => {
       });
   });
 
+  const getOfferedRequests = async username => {
+    let offeredRequests = await Request.find({ ownersname: username });
+
+    let offeredBookPromises = offeredRequests.map(request => {
+      offeredBookPromise = Book.findOne({
+        ownersname: request.requestersName,
+        title: request.offeredBook
+      });
+      return offeredBookPromise;
+    });
+    let requestedBookPromises = offeredRequests.map(request => {
+      requestedBookPromise = Book.findOne({
+        ownersname: request.ownersname,
+        title: request.requestedBook
+      });
+      return requestedBookPromise;
+    });
+    let offeredBookPromises = offeredRequests.map(request => {
+      usersPromises = User.findOne({ username: request.requestersName });
+    });
+
+    const offeredBooks = await Promise.all(offeredBookPromises);
+    const requestedBooks = await Promise.all(requestedBookPromises);
+    const users = await Promise.all(usersPromises);
+
+    return { offeredRequests, offeredBooks, requestedBooks, users };
+  };
+
   const getMyRequests = async username => {
     let requests = await Request.find({ requestersName: username });
 
@@ -260,9 +288,36 @@ module.exports = app => {
       i++;
     });
 
-    //let requests = await Request.find({ ownersname: username });
+    let {
+      offeredRequests,
+      offeredBooks,
+      requestedBooks,
+      users
+    } = getOfferedRequests(username);
+
+    let i = 0;
+    offeredBooks.map(offeredBook => {
+      offeredRequests[i].offeredBookAuthor = offeredBook.author;
+      i++;
+    });
+
+    i = 0;
+    requestedBooks.map(requestedBook => {
+      offeredRequests[i].requestedBookAuthor = requestedBook.author;
+      i++;
+    });
+
+    users.map((user, i) => {
+      if (users[i].city) {
+        offeredRequests[i].city = user.city;
+      } else {
+        offeredRequests[i].city = "";
+      }
+      return user;
+    });
 
     res.render("requests", {
+      offeredRequests: offeredRequests,
       user: req.user,
       requests: requests
     });

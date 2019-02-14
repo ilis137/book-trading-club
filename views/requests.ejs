@@ -73,9 +73,41 @@
                     <% } %>
                <% } %>
             </div>
-            <div class="col-md-6 col-sm-12">
+           <div class="col-md-6 col-sm-12">
+             <h2 class="left-align">Requests For You:</h2>
+            <% if(requests.length){ %>
+                <% for(var i=requests.length-1;i>=0;i--){ %>
+                        <div class="card">
+                            <div class="card-content list-group-item">
+                                <div class="right-align">
+                                    <i class="material-icons delete-request" id="<%= requests[i]._id %>">cancel</i>
+                                </div>
+                                <div class="row">
+                                        <div class="col s12">
+                                            <h2><%= user.username %> wants to give:</h2>
+                                            <li class="give list-group-item">
+                                                <h2><%= offeredRequests[i].offeredBook %></h2>
+                                                <h5><%= offeredRequestss[i].offeredBookAuthor %></h5>
+                                            </li>
+                                        </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s12">
+                                        <h2>and wants to take:</h2>
+                                        <li class="take list-group-item">
+                                            <h2><%= offeredRequests[i].requestedBook %></h2>
+                                            <h5><%= offeredRequests[i].requestedBookAuthor %></h5>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="s12 col center-align">
+                                    <button type="button" class="btn btn-primary" id="accept-request">Accept Request</button>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+               <% } %>
             
-            <!--Add requests send to you-->
             </div>
         </div>
     </div>
