@@ -217,10 +217,7 @@ module.exports = app => {
       });
   });
 
-  //API to get my requests
-  app.get("/createRequests", async (req, res) => {
-    const { username } = req.user;
-    //const username = "ilshh";
+  const getMyRequests = async username => {
     let requests = await Request.find({ requestersName: username });
 
     let offeredBookPromises = requests.map(request => {
@@ -240,6 +237,7 @@ module.exports = app => {
 
     const offeredBooks = await Promise.all(offeredBookPromises);
     const requestedBooks = await Promise.all(requestedBookPromises);
+
     let i = 0;
     offeredBooks.map(offeredBook => {
       requests[i].offeredBookAuthor = offeredBook.author;
@@ -251,6 +249,17 @@ module.exports = app => {
       requests[i].requestedBookAuthor = requestedBook.author;
       i++;
     });
+
+    return requests;
+  };
+
+  //API to get my requests
+  app.get("/createRequests", async (req, res) => {
+    const { username } = req.user;
+    //const username = "ilshh";
+    getMyRequests(username);
+
+    let requests = await Request.find({ ownersname: username });
 
     res.render("requests", {
       user: req.user,
