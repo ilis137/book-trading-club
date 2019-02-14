@@ -258,7 +258,7 @@ module.exports = app => {
       i++;
     });
 
-    let requests = await Request.find({ ownersname: username });
+    //let requests = await Request.find({ ownersname: username });
 
     res.render("requests", {
       user: req.user,
