@@ -290,19 +290,19 @@ module.exports = app => {
 
     let {
       offeredRequests,
-      offeredBooks,
-      requestedBooks,
+      offeredBooksForRequest,
+      requestedBooksForRequest,
       users
     } = getOfferedRequests(username);
 
     let i = 0;
-    offeredBooks.map(offeredBook => {
+    offeredBooksForRequest.map(offeredBook => {
       offeredRequests[i].offeredBookAuthor = offeredBook.author;
       i++;
     });
 
     i = 0;
-    requestedBooks.map(requestedBook => {
+    requestedBooksForRequest.map(requestedBook => {
       offeredRequests[i].requestedBookAuthor = requestedBook.author;
       i++;
     });
