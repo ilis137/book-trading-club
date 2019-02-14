@@ -235,7 +235,7 @@ module.exports = app => {
       return requestedBookPromise;
     });
     let usersPromises = offeredRequests.map(request => {
-      User.findOne({ username: request.requestersName });
+      const userPromise = User.findOne({ username: request.requestersName });
       return userPromise;
     });
 
