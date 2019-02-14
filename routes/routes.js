@@ -222,14 +222,14 @@ module.exports = app => {
 
     let offeredBookPromises = offeredRequests.map(request => {
       offeredBookPromise = Book.findOne({
-        ownersname: request.ownersname,
+        ownersname: request.requestersName,
         title: request.offeredBook
       });
       return offeredBookPromise;
     });
     let requestedBookPromises = offeredRequests.map(request => {
       requestedBookPromise = Book.findOne({
-        ownersname: request.requestersName,
+        ownersname: request.ownersname,
         title: request.requestedBook
       });
       return requestedBookPromise;
@@ -255,14 +255,14 @@ module.exports = app => {
 
     let offeredBookPromises = requests.map(request => {
       offeredBookPromise = Book.findOne({
-        ownersname: request.requestersName,
+        ownersname: request.requestersName, //taker
         title: request.offeredBook
       });
       return offeredBookPromise;
     });
     requestedBookPromises = requests.map(request => {
       requestedBookPromise = Book.findOne({
-        ownersname: request.ownersname,
+        ownersname: request.ownersname, //giver
         title: request.requestedBook
       });
       return requestedBookPromise;
