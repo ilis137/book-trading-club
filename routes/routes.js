@@ -365,7 +365,7 @@ module.exports = app => {
       { new: true }
     )
       .then(() => {
-        res.redirect("/books");
+        res.redirect("/createRequests");
       })
       .catch(err => {
         throw err;
