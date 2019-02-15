@@ -5,9 +5,11 @@
       <a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="/books">Books</a></li>
-        <li><a href="/createRequests">Requests</a></li>
+        
        <li class="dropdown">
         <% if(user){ %>
+        <li><a href="/createRequests">Requests</a></li>
+        <li><a  href="/trades">Trades</a></li>
         <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <%= user.username %>
         </a>
@@ -30,15 +32,16 @@
 
     <ul class="sidenav" id="mobile">
    <li><a href="/books">Books</a></li>
-    <li><a href="/createRequests">create requests</a></li>
+   
 
         <% if(user){ %>
+          <li><a href="/createRequests">Requests</a></li>
+          <li><a  href="/userInfo">Profile</a></li>
+          <li><a  href="/editInfo">Edit Profile</a></li>
+          <li><a  href="/books/my">My Books</a></li>
+          <li><a  href="/trades">Trades</a></li>
+          <li><a  href="/logout">Logout</a></li>
        
-          <li><a class="dropdown-item" href="/userInfo">Profile</a></li>
-          <li><a class="dropdown-item" href="/editInfo">Edit Profile</a></li>
-          <li><a class="dropdown-item" href="/books/my">My Books</a></li>
-          <li><a class="dropdown-item" href="/logout">Logout</a></li>
-      
         <% } else{ %>
         <li> <a href="/auth/github"><i class="fab fa-github"> </i> login</a></li>
          <% } %>
