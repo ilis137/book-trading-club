@@ -379,6 +379,7 @@ module.exports = app => {
           .then(myrequests => {
             requests.concat(myrequests);
             res.render("trades", {
+              user: req.user,
               requests: requests
             });
           })
