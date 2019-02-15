@@ -371,4 +371,23 @@ module.exports = app => {
         throw err;
       });
   });
+  app.put("/trades", (req, res) => {
+    const { username } = req.user;
+    Request.find({ ownersname: username, status: "completed" })
+      .then(requests => {
+        Request.find({ requestersName: username, status: "completed" })
+          .then(myrequests => {
+            requests.concat(myrequests);
+            res.render("trades", {
+              requests: requests
+            });
+          })
+          .catch(err => {
+            throw err;
+          });
+      })
+      .catch(err => {
+        throw err;
+      });
+  });
 };
