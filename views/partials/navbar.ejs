@@ -5,7 +5,10 @@
       <a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="/books">Books</a></li>
-        
+        <% if(user){ %>
+        <li><a href="/createRequests">Requests</a></li>
+        <li><a  href="/trades">Trades</a></li>
+        <% } %>
        <li class="dropdown">
         <% if(user){ %>
         <li><a href="/createRequests">Requests</a></li>
