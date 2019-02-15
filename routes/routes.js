@@ -371,7 +371,7 @@ module.exports = app => {
         throw err;
       });
   });
-  app.put("/trades", (req, res) => {
+  app.get("/trades", (req, res) => {
     const { username } = req.user;
     Request.find({ ownersname: username, status: "completed" })
       .then(requests => {
