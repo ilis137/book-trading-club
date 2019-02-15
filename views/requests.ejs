@@ -42,12 +42,14 @@
                 <h2 class="left-align">Your Requests:</h2>
             <% if(requests.length){ %>
                 <% for(var i=requests.length-1;i>=0;i--){ %>
+                    <% if(requests[i].status=="pending"){ %>
                         <div class="card">
                             <div class="card-content list-group-item">
                                 <div class="right-align">
                                     <i class="material-icons delete-request" id="<%= requests[i]._id %>">cancel</i>
                                 </div>
                                 <div class="row">
+                               
                                         <div class="col s12">
                                             <h2><%= user.username %> wants to give:</h2>
                                             <li class="give list-group-item">
@@ -55,6 +57,7 @@
                                                 <h5><%= requests[i].offeredBookAuthor %></h5>
                                             </li>
                                         </div>
+                                
                                 </div>
 
 
@@ -70,6 +73,44 @@
                                 </div>
                             </div>
                         </div>
+                       <% } %> 
+                    <% } %>
+               <% } %>
+                <h2 class="left-align">cancelled Requests:</h2>
+            <% if(requests.length){ %>
+                <% for(var i=requests.length-1;i>=0;i--){ %>
+                    <% if(requests[i].status=="canceled"){ %>
+                        <div class="card">
+                            <div class="card-content list-group-item">
+                                <div class="right-align">
+                                    <i class="material-icons delete-request" id="<%= requests[i]._id %>">cancel</i>
+                                </div>
+                                <div class="row">
+                               
+                                        <div class="col s12">
+                                            <h2><%= user.username %> wants to give:</h2>
+                                            <li class="give list-group-item">
+                                                <h2><%= requests[i].offeredBook %></h2>
+                                                <h5><%= requests[i].offeredBookAuthor %></h5>
+                                            </li>
+                                        </div>
+                                
+                                </div>
+
+
+                                
+                                <div class="row">
+                                    <div class="col s12">
+                                        <h2>and wants to take:</h2>
+                                            <li class="take list-group-item">
+                                                <h2><%= requests[i].requestedBook %></h2>
+                                                <h5><%= requests[i].requestedBookAuthor %></h5>
+                                            </li>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       <% } %> 
                     <% } %>
                <% } %>
             </div>
@@ -77,6 +118,7 @@
              <h2 class="left-align">Requests For You:</h2>
             <% if(requests.length){ %>
                 <% for(var i=requests.length-1;i>=0;i--){ %>
+                    <% if(requests[i].status=="pending"){ %>
                         <div class="card">
                             <div class="card-content list-group-item">
                                 <div class="right-align">
@@ -101,12 +143,14 @@
                                     </div>
                                 </div>
                                 <div class="s12 col center-align">
-                                    <button type="button" class="btn btn-primary" id="accept-request">Accept Request</button>
+                                    <button type="button" class="btn btn-primary" id="accept-request" data-id="<%= requests[i]._id %>">Accept Request</button>
+                                    <a href="#" class="waves-effect btn-flat"id="cancel-request" >Cancel</a>
                                 </div>
                             </div>
                         </div>
                     <% } %>
-               <% } %>
+                <% } %>
+            <% } %>
             
             </div>
         </div>
@@ -170,7 +214,31 @@
 
             })
        
-           
+           $("#accept-request").click(function(){
+               $.ajax({
+                    url:"https://book-trading-iliyas.herokuapp.com/accept/request",
+                     method:"PUT",
+                     data:{
+                     id:this.dataset.id
+                    },
+                    complete:function(){
+                        window.location.assign("/createRequests")
+                    }
+               })
+           })
+           $("#cancel-request").click(function(){
+               $.ajax({
+                    url:"https://book-trading-iliyas.herokuapp.com/accept/request",
+                     method:"PUT",
+                     data:{
+                     id:this.dataset.id
+                    },
+                    complete:function(){
+                        window.location.assign("/createRequests")
+                    }
+
+               })
+           })
         })
     </script>
 
