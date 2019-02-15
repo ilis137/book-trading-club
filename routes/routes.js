@@ -342,18 +342,22 @@ module.exports = app => {
       });
   });
   //API to accept request
-  app.post("/accept/request", (req, res) => {
+  app.put("/accept/request", (req, res) => {
     const { id } = req.body;
-    Request.findByIdAndUpdate(id, { status: "completed" }, { new: true })
+    Request.findByIdAndUpdate(
+      id,
+      { $set: { status: "completed" } },
+      { new: true }
+    )
       .then(() => {
-        res.redirect("/books");
+        res.redirect("/createRequests");
       })
       .catch(err => {
         throw err;
       });
   });
   //API to cancel request
-  app.post("/cancel/request", (req, res) => {
+  app.put("/cancel/request", (req, res) => {
     const { id } = req.body;
     Request.findByIdAndUpdate(
       id,
