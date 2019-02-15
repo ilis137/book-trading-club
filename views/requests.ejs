@@ -76,6 +76,7 @@
                        <% } %> 
                     <% } %>
                <% } %>
+            
                 <h2 class="left-align">cancelled Requests:</h2>
             <% if(requests.length){ %>
                 <% for(var i=requests.length-1;i>=0;i--){ %>
@@ -116,9 +117,9 @@
             </div>
            <div class="col-md-6 col-sm-12">
              <h2 class="left-align">Requests For You:</h2>
-            <% if(requests.length){ %>
-                <% for(var i=requests.length-1;i>=0;i--){ %>
-                    <% if(requests[i].status=="pending"){ %>
+            <% if(offeredRequests.length){ %>
+                <% for(var i=offeredRequests.length-1;i>=0;i--){ %>
+                    <% if(offeredRequests[i].status=="pending"){ %>
                         <div class="card">
                             <div class="card-content list-group-item">
                                 <div class="right-align">
