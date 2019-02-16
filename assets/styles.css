@@ -1,0 +1,11 @@
+*{
+    padding:0;
+    border:0;
+    margin:0;
+
+}
+
+.nav-wrapper div a:hover,.nav-mobile li a:hover,.dropdown-menu a:hover{
+    text-decoration: none;
+}
+
