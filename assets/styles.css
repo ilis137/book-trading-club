@@ -16,3 +16,17 @@ div .dropdown-menu{
 .dropdown-menu a:hover{
     color:#000!important
 }
+.card-title h3{
+    font-size:36px;
+}
+
+.waves-effect{
+    text-decoration:none;
+}
+
+label strong{
+    font-size: 20px;
+}
+.card-action a{
+    text-decoration: none;
+}
