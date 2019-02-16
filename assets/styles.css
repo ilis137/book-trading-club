@@ -14,5 +14,5 @@ div .dropdown-menu{
     width:150px
 }
 .dropdown-menu a:hover{
-    color:#000!
+    color:#000!important
 }
