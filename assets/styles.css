@@ -7,4 +7,5 @@
 
 .nav-wrapper div a:hover,.nav-mobile li a:hover,.dropdown-menu a:hover{
     text-decoration: none;
+    color:none;
 }
