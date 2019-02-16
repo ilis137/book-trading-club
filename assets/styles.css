@@ -5,13 +5,13 @@
  
 }
 
-.nav-wrapper div a:hover,.nav-mobile li a:hover,.dropdown-menu a:hover{
+.nav-wrapper div a:hover,.nav-mobile li a:hover{
     text-decoration: none;
     color:#fff;
 
 }
 div .dropdown-menu{
-    width:100%
+    width:150px
 }
 .dropdown-menu a:hover{
     color:#000!
