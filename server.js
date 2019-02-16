@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const githubStrategy = require("passport-github").Strategy;
 const mongoose = require("mongoose");
+const path = require("path");
 
 require("dotenv").config();
 const User = require("./models/users.js");
@@ -28,6 +29,9 @@ app.use(
     maxAge: 24 * 60 * 1000
   })
 );
+
+app.use(express.static(path.join(__dirname, "assets")));
+
 app.use(cors());
 app.use(morgan("combined"));
 app.use(bodyParser.json());
