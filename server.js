@@ -30,7 +30,7 @@ app.use(
   })
 );
 
-app.use(express.static(path.join(__dirname, "assets")));
+app.use("/assets", express.static(path.join(__dirname, "assets")));
 
 app.use(cors());
 app.use(morgan("combined"));
